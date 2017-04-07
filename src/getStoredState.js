@@ -34,7 +34,10 @@ export default function getStoredState (config, onComplete) {
         if (completionCount === restoreCount) complete(null, restoredState)
       })
     })
-  })
+  }).catch(function(err) {
+    // localforage needs a catch block for 'keys()'
+    console.error(err);
+  });
 
   function rehydrate (key, serialized) {
     let state = null
